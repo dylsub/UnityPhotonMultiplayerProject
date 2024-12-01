@@ -31,7 +31,8 @@ public class NetworkRunnerController : MonoBehaviour, INetworkRunnerCallbacks
         //Register so we will get callbacks as well
         networkRunnerInstance.AddCallbacks(this);
 
-        // networkRunnerInstance.ProvideInput = true;
+        // Player collects input and then sends it to the server
+        networkRunnerInstance.ProvideInput = true;
 
         var startGameArgs = new StartGameArgs()
         {

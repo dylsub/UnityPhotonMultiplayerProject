@@ -42,9 +42,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4853668665657099997}
   - component: {fileID: 4853668665657099986}
-  - component: {fileID: 8726848672980527830}
   - component: {fileID: 2149786474276800704}
+  - component: {fileID: 8726848672980527830}
   - component: {fileID: -2554261454893421710}
+  - component: {fileID: 1669909905233585011}
+  - component: {fileID: 1857970864716166703}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -91,28 +93,9 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 2149786474276800704}
+  - {fileID: 1669909905233585011}
+  - {fileID: 1857970864716166703}
   SimulationBehaviours: []
---- !u!50 &8726848672980527830
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4853668665657099996}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &2149786474276800704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +124,27 @@ MonoBehaviour:
     RotTeleportRadians: 1.5
   UseLegacySharedModeInterpolation: 0
   TargetInterpolationDelay: 0.03
+--- !u!50 &8726848672980527830
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4853668665657099996}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 5
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!61 &-2554261454893421710
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -167,6 +171,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.31807137, y: 0.556021}
   m_EdgeRadius: 0
+--- !u!114 &1669909905233585011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4853668665657099996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4c714a91779d864a9d16b46d0b5bad4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  moveSpeed: 6
+--- !u!114 &1857970864716166703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4853668665657099996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54207afb01183824da2fc4184b4c5e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  player: {fileID: 1669909905233585011}
 --- !u!1 &4853668666234422640
 GameObject:
   m_ObjectHideFlags: 0
