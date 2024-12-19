@@ -36,7 +36,9 @@ public class MiddleSectionPanel : LobbyPanelBase
         if (field.Length >= 2)
         {
             Debug.Log($"--------------- {mode} ---------------");
-            GlobalManagers.Instance.networkRunnerController.StartGame(mode, field);
+
+            // Create the room
+            networkRunnerController.StartGame(mode, field);
         }
     }
 }

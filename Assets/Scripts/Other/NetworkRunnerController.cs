@@ -11,12 +11,18 @@ public class NetworkRunnerController : MonoBehaviour, INetworkRunnerCallbacks
     public event Action OnStartedRunnerConnection;
     public event Action OnPlayerJoinedSuccessfully;
     [SerializeField] private NetworkRunner networkRunnerPrefab;
+    public string LocalPlayerNickname { get; private set; }
 
-    private NetworkRunner networkRunnerInstance;
+    public NetworkRunner networkRunnerInstance;
 
     public void ShutDownRunner()
     {
         networkRunnerInstance.Shutdown();
+    }
+
+    public void SetPlayerNickname(string str)
+    {
+        LocalPlayerNickname = str;
     }
 
     public async void StartGame(GameMode mode, string roomName)
@@ -123,7 +129,19 @@ public class NetworkRunnerController : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)
     {
-        Debug.Log("OnSessionListUpdated");
+        Debug.Log("OnSessionListUpdated - Available Sessions:");
+
+        if (sessionList == null || sessionList.Count == 0)
+        {
+            Debug.Log("No sessions available.");
+        }
+        else
+        {
+            foreach (var session in sessionList)
+            {
+                Debug.Log($"Session Name: {session.Name}, Player Count: {session.PlayerCount}/{session.MaxPlayers}, Is Open: {session.IsOpen}, Is Visible: {session.IsVisible}");
+            }
+        }
     }
 
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason)

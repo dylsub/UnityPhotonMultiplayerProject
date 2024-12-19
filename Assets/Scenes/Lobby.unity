@@ -260,6 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   networkRunnerPrefab: {fileID: 7077389274627756395, guid: de0d582861f82a84488afb088217f126, type: 3}
+  networkRunnerInstance: {fileID: 0}
 --- !u!4 &557401083
 Transform:
   m_ObjectHideFlags: 0
