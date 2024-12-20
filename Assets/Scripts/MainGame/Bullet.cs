@@ -6,7 +6,9 @@ using UnityEngine;
 public class Bullet : NetworkBehaviour
 {
     [SerializeField] private LayerMask groundLayerMask;
+    [SerializeField] private LayerMask playerLayerMask;
     [SerializeField] private float moveSpeed = 20f;
+    [SerializeField] private int bulletDamage = 10;
     [SerializeField] private float lifeTimeAmount = 0.8f;
 
     [Networked] private NetworkBool didHitSomething { get; set; }
@@ -21,7 +23,11 @@ public class Bullet : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
-        CheckIfHitGround();
+        if (!didHitSomething)
+        {
+            CheckIfHitGround();
+            CheckIfWeHitAPlayer();
+        }
 
         if (lifeTimeTimer.ExpiredOrNotRunning(Runner) == false && !didHitSomething)
         {
@@ -30,6 +36,7 @@ public class Bullet : NetworkBehaviour
 
         if (lifeTimeTimer.Expired(Runner) || didHitSomething)
         {
+            lifeTimeTimer = TickTimer.None;
             Runner.Despawn(Object);
         }
     }
@@ -41,6 +48,36 @@ public class Bullet : NetworkBehaviour
         if (groundCollider != default)
         {
             didHitSomething = true;
+        }
+    }
+
+    private List<LagCompensatedHit> hits = new List<LagCompensatedHit>();
+
+    private void CheckIfWeHitAPlayer()
+    {
+        Runner.LagCompensation.OverlapBox(transform.position, coll.bounds.size, Quaternion.identity, Object.InputAuthority, hits, playerLayerMask);
+
+        if (hits.Count > 0)
+        {
+            foreach (var item in hits)
+            {
+                if (item.Hitbox != null)
+                {
+                    var player = item.Hitbox.GetComponentInParent<NetworkObject>();
+                    var didNotHitOurOwnPlayer = player.InputAuthority.PlayerId != Object.InputAuthority.PlayerId;
+
+                    if (didNotHitOurOwnPlayer)
+                    {
+                        if (Runner.IsServer)
+                        {
+                            player.GetComponent<PlayerHealthController>().Rpc_ReducePlayerHealth(bulletDamage);
+                        }
+
+                        didHitSomething = true;
+                        break;
+                    }
+                }
+            }
         }
     }
 

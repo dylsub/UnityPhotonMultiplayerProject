@@ -70,6 +70,9 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
         {
             // Disable the camera for non-local players
             cam.SetActive(false);
+
+            //Make sure that we are seeing proxies (other players) as snapshots not predicted
+            GetComponent<NetworkRigidbody2D>().InterpolationDataSource = InterpolationDataSources.Snapshots;
         }
     }
 

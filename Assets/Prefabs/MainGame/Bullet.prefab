@@ -95,8 +95,8 @@ GameObject:
   - component: {fileID: 8722234727833759855}
   - component: {fileID: -5337366410614056914}
   - component: {fileID: 7916966895656563734}
-  - component: {fileID: 529710299723838119}
   - component: {fileID: 426026359396024236}
+  - component: {fileID: 529710299723838119}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -173,6 +173,27 @@ MonoBehaviour:
     RotTeleportRadians: 1.5
   UseLegacySharedModeInterpolation: 0
   TargetInterpolationDelay: 0.03
+--- !u!114 &426026359396024236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7301009580227503371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e627089f7e3f61c4582d4802960a5096, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  moveSpeed: 20
+  lifeTimeAmount: 0.8
 --- !u!61 &529710299723838119
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -199,21 +220,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.29567617, y: 0.07996091}
   m_EdgeRadius: 0
---- !u!114 &426026359396024236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7301009580227503371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e627089f7e3f61c4582d4802960a5096, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interpolationDataSource: 0
-  groundLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  moveSpeed: 20
-  lifeTimeAmount: 0.8
