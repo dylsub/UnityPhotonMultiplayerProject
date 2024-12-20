@@ -193,6 +193,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   moveSpeed: 20
+  bulletDamage: 10
   lifeTimeAmount: 0.8
 --- !u!61 &529710299723838119
 BoxCollider2D:

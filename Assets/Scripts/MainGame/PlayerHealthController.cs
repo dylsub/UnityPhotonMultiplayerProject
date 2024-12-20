@@ -16,9 +16,11 @@ public class PlayerHealthController : NetworkBehaviour
     [Networked(OnChanged = nameof(HealthAmountChanged))] private int currentHealthAmount { get; set; }
 
     private const int MAX_HEALTH_AMOUNT = 100;
+    private PlayerController playerController;
 
     public override void Spawned()
     {
+        playerController = GetComponent<PlayerController>();
         currentHealthAmount = MAX_HEALTH_AMOUNT;
     }
 
@@ -72,8 +74,14 @@ public class PlayerHealthController : NetworkBehaviour
         if (healthAmount <= 0)
         {
             // Todo kill the player
+            playerController.KillPlayer();
             Debug.Log("Player is dead");
         }
+    }
+
+    public void ResetHealthAmountToMax()
+    {
+        currentHealthAmount = MAX_HEALTH_AMOUNT;
     }
 
 
