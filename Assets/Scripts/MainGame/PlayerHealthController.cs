@@ -8,8 +8,10 @@ using UnityEngine.UI;
 
 public class PlayerHealthController : NetworkBehaviour
 {
+    [SerializeField] private PlayerCameraController playerCameraController;
     [SerializeField] private Image fillAmountImg;
     [SerializeField] private TextMeshProUGUI healthAmountText;
+    [SerializeField] private Animator bloodScreenHitAnimator;
 
     [Networked(OnChanged = nameof(HealthAmountChanged))] private int currentHealthAmount { get; set; }
 
@@ -59,7 +61,12 @@ public class PlayerHealthController : NetworkBehaviour
         if (isLocalPlayer)
         {
             // play animation, screen shake
+            const string BLOOD_HIT_CLIP_NAME = "BloodScreenHit";
+            bloodScreenHitAnimator.Play(BLOOD_HIT_CLIP_NAME);
             Debug.Log("Local player got hit");
+
+            var shakeAmount = new Vector3(0.1f, -0.3f, 0f);
+            playerCameraController.ShakeCamera(shakeAmount);
         }
 
         if (healthAmount <= 0)
