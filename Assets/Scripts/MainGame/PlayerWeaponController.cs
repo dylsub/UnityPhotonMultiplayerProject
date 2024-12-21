@@ -35,7 +35,7 @@ public class PlayerWeaponController : NetworkBehaviour, IBeforeUpdate
 
     public void BeforeUpdate()
     {
-        if (Runner.LocalPlayer == Object.HasInputAuthority && playerController.PlayerIsAlive)
+        if (Runner.LocalPlayer == Object.HasInputAuthority && playerController.AcceptAnyInput)
         {
             var direction = localCam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
@@ -50,12 +50,21 @@ public class PlayerWeaponController : NetworkBehaviour, IBeforeUpdate
 
     public override void FixedUpdateNetwork()
     {
-        if (Runner.TryGetInputForPlayer<PlayerData>(Object.InputAuthority, out var input) && playerController.PlayerIsAlive)
+        if (Runner.TryGetInputForPlayer<PlayerData>(Object.InputAuthority, out var input))
         {
-            CheckShootingInput(input);
-            currentPlayerPivotRotation = input.GunPivotRotation;
+            if (playerController.AcceptAnyInput)
+            {
+                CheckShootingInput(input);
+                currentPlayerPivotRotation = input.GunPivotRotation;
 
-            buttonsPrev = input.NetworkButtons;
+                buttonsPrev = input.NetworkButtons;
+            }
+            else
+            {
+                IsHoldingShootingKey = false;
+                playMuzzleEffect = false;
+                buttonsPrev = default;
+            }
         }
 
         pivotToRotate.rotation = currentPlayerPivotRotation;
